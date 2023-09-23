@@ -5,18 +5,20 @@ Escreva um ou dois parágrafo resumindo o objetivo do seu projeto.
 
 ## Alunos integrantes da equipe
 
-* Higor Fischer de Paula Lopes
-* Priscila Andrade de Moraes
-* Iuri Saad Furtunato Fialho
-* Rodrigo Oliveira Andrade de Vasconcelos
-* Rafael Marcos Almeida Cruz
 * Alvaro Henrique Tavares
+* Higor Fischer de Paula Lopes
+* Iuri Saad Furtunato Fialho
 * João de Jesus e Avila
+* Priscila Andrade de Moraes
+* Rafael Marcos Almeida Cruz
+* Rodrigo Oliveira Andrade de Vasconcelos
+
 
 ## Professores responsáveis
 
-* Nome completo do professor 1
-* Nome completo do professor 2
+* Hayala Nepomuceno Curto
+* Lucio Mauro Pereira
+* Rommel Vieira Carneiro
 
 ## Instruções de utilização
 
