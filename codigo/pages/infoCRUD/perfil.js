@@ -1,6 +1,5 @@
 window.addEventListener('load', carregarDados, false);
 
-
 let urgentButton = document.getElementById("urgentButton");
 urgentButton.addEventListener("click", () => {
   let id = new URLSearchParams(window.location.search).get("id");
@@ -31,9 +30,8 @@ let descricaoCirurgia = document.querySelector('#descricaoCirurgia');
 let internacao = document.querySelector('#internacao');
 let descricaoInternacao = document.querySelector('#descricaoInternacao');
 
-
 function carregarDados() {
-  let id = new URLSearchParams(window.location.search).get("id");
+  let id = getCurrentUser().id
 
 	fetch(`https://banco-de-dados.prizinhaw.repl.co/pacientes/${id}`) 
 		.then(function (response) { return response.json() })

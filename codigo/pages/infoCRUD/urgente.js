@@ -20,6 +20,8 @@ let historico2 = document.querySelector('#historico2');
 function carregarDados() {
   let id = new URLSearchParams(window.location.search).get("id");
 
+  console.log(getCurrentUser())
+
 	fetch(`https://banco-de-dados.prizinhaw.repl.co/pacientes/${id}`) 
 		.then(function (response) { return response.json() })
 		.then(function(db) {
