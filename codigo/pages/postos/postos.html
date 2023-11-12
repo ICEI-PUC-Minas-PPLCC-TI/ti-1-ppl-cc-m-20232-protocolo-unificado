@@ -1,187 +1,185 @@
 <!DOCTYPE html>
-<html lang="en">
-
+<html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Postos Próximos</title>
+    <title>Unidades Próximas</title>
     <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
-    <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
-</head>
-
-<body>
-
-    <header>
-        <h1>POSTOS PRÓXIMOS</h1>
-    </header>
-
-    <div id="map" class="map-container" style="height: 500px;"></div>
-
-    <script>
-        const OPEN_CAGE_API_KEY = '2da59c3fc0294ecd803b0d393d56c6d8';
-
-        // Convertendo metros para graus 
-        function metersToDegrees(meters, isLatitude) {
-            const earthRadius = 6371000; // Raio médio da Terra em m
-            return meters / earthRadius * (isLatitude ? 180 / Math.PI : 1);
-        }
-
-        // Gerando pontos aleatórios dentro de uma distância específica de onde eu tô
-        function generateRandomPoints(center, numPoints, minDistance, maxDistance) {
-            const points = [];
-            for (let i = 0; i < numPoints; i++) {
-                const randomDistance = Math.random() * (maxDistance - minDistance) + minDistance;
-                const randomAngle = Math.random() * 2 * Math.PI;
-                const deltaLat = metersToDegrees(randomDistance, true);
-                const deltaLng = metersToDegrees(randomDistance, false);
-                const randomLat = center[0] + deltaLat * (Math.random() > 0.5 ? 1 : -1);
-                const randomLng = center[1] + deltaLng * (Math.random() > 0.5 ? 1 : -1);
-                points.push([randomLat, randomLng]);
-            }
-            return points;
-        }
-
-        //  Inicializando o mapa
-        function initializeMap(center) {
-            const map = L.map('map', {
-                center: center,
-                zoom: 18 
-            });
-            L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-                attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-            }).addTo(map);
-            return map;
-        }
-
-        // Adicionando marcadores ao mapa
-        async function addMarkers(map, points) {
-            for (let i = 0; i < points.length; i++) {
-                const point = points[i];
-                const address = await getAddress(point);
-                const marker = L.marker(point).addTo(map);
-                marker.bindPopup(`<b>Unidade de Saúde ${i + 1}</b><br>Endereço: ${address}`);
-            }
-        }
-
-        // Obtendo o endereço 
-        async function getAddress(coords) {
-            const url = `https://api.opencagedata.com/geocode/v1/json?q=${coords[0]}+${coords[1]}&key=${OPEN_CAGE_API_KEY}`;
-            const response = await fetch(url);
-            const data = await response.json();
-            const results = data.results;
-            if (results && results.length > 0) {
-                return results[0].formatted;
-            } else {
-                return 'Endereço não encontrado';
-            }
-        }
-
-        // Obtendo a localização atual
-        async function getCurrentLocation() {
-            try {
-                const position = await new Promise((resolve, reject) => {
-                    navigator.geolocation.getCurrentPosition(resolve, reject);
-                });
-                return [position.coords.latitude, position.coords.longitude];
-            } catch (error) {
-                console.error('Erro ao obter a localização:', error);
-                return null;
-            }
-        }
-
-        getCurrentLocation().then(currentLocation => {
-            if (currentLocation) {
-                // Mapa centrado na localização atual
-                const map = initializeMap(currentLocation);
-
-                // Marcador para a localização atual 
-                addCurrentLocationMarker(map, currentLocation);
-
-                // Gera pontos aleatórios 
-                const randomPoints = generateRandomPoints(currentLocation, 5, 200, 1000);
-
-                // Adiciona marcadores ao mapa
-                addMarkers(map, randomPoints);
-            }
-        });
-
-        // adiciona um marcador com a localização atual em uma cor diferente
-        function addCurrentLocationMarker(map, location) {
-            const currentLocationMarker = L.marker(location, { icon: L.divIcon({ className: 'current-location-marker', iconSize: [20, 20] }) }).addTo(map);
-            currentLocationMarker.bindPopup('<b>Sua Localização Atual</b>').openPopup();
-        }
-    </script>
-
     <style>
         body {
+            font-family: 'Arial', sans-serif;
             margin: 0;
             padding: 0;
-            font-family: Arial, sans-serif;
-            background-color: #ffffff;
+            display: flex;
+            flex-direction: column;
+            height: 100vh;
         }
-
+        
         header {
-            background-color: #4169E1; 
+            background-color: #9dcbe8;
             padding: 10px;
             text-align: center;
             display: flex;
             align-items: center;
+            justify-content: space-between;
+        }
+
+        .logo {
+            max-height: 70px;
+            margin-left: auto;
         }
 
         h1 {
-            color: #ffffff; 
-            margin: 0 auto;
-            align-items: center;
+            color: #ffffff;
+            margin: 0;
         }
 
-        section {
+        #map {
+            height: 60vh;
+            flex: 1;
+        }
+
+        #search-container {
+            position: absolute;
+            top: 20px;
+            left: 50%;
+            transform: translateX(-50%);
             display: flex;
-            flex-direction: column;
             align-items: center;
-            margin-top: 10vh; 
+            z-index: 1000;
         }
 
-        .form-inline {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
+        #search {
+            padding: 10px;
+            font-size: 16px;
+            margin-right: 10px;
         }
 
-        .form-group {
-            margin-bottom: 15px; 
+        #searchButton {
+            padding: 10px;
+            font-size: 16px;
+            cursor: pointer;
         }
 
-        .map-container {
-            border-radius: 10px; 
-            overflow: hidden;
-            width: 350px; 
-            height: 400px; 
-            margin-top: 20px; 
+        .legend {
+            position: absolute;
+            bottom: 10px;
+            right: 10px;
+            background-color: white;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            z-index: 1000;
         }
 
-        iframe {
-            width: 100%;
-            height: 100%;
-            border: 0;
-        }
-
-        @media (max-width: 600px) {
-            header {
-                padding: 20px;
-                flex-direction: column; 
-            }
-
-            img {
-                margin-top: 10px;
-            }
-        }
-        .current-location-marker {
-            background-color: red; 
-            border-radius: 50%;
+        .legend img {
+            max-height: 20px; /* Ajuste a altura conforme necessário */
+            margin-right: 5px;
         }
     </style>
+</head>
+<body>
+
+    <header>
+        <h1>POSTOS PRÓXIMOS</h1>
+        <img src="imgs/logo.png" alt="Logo do posto" class="logo">
+    </header>
+
+    <div id="search-container">
+        <input type="text" id="search" placeholder="Digite um local">
+        <button id="searchButton">Pesquisar</button>
+    </div>
+
+    <div id="map"></div>
+
+    <div class="legend">
+        <p><img src="imgs/hosp.png" alt="Hospitais"> Hospitais e demais unidades de saúde</p>
+        <p><img src="imgs/posto.png" alt="Farmácias"> Farmácias</p>
+    </div>
+    
+    <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+    <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+    <script>
+        var map = L.map('map').setView([0, 0], 15);
+        var currentMarker = null;
+
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            maxZoom: 19,
+        }).addTo(map);
+
+        navigator.geolocation.getCurrentPosition(function(location) {
+            var latlng = new L.LatLng(location.coords.latitude, location.coords.longitude);
+            currentMarker = L.marker(latlng).addTo(map);
+            map.setView(latlng, 15);
+            updatePopup(latlng);
+        });
+
+        function updatePopup(latlng) {
+            fetch('https://api.opencagedata.com/geocode/v1/json?q=' + latlng.lat + '+' + latlng.lng + '&key=2da59c3fc0294ecd803b0d393d56c6d8')
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error('Erro na requisição da API');
+                    }
+                    return response.json();
+                })
+                .then(data => {
+                    var address = data.results[0].formatted;
+                    map.openPopup(address, latlng);
+                })
+                .catch(error => {
+                    console.error('Erro:', error);
+                    alert('Erro ao obter o endereço do local. Tente novamente.');
+                });
+        }
+
+        function searchLocation() {
+            var query = document.getElementById('search').value;
+
+            fetch('https://api.opencagedata.com/geocode/v1/json?q=' + query + '&key=2da59c3fc0294ecd803b0d393d56c6d8')
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error('Erro na requisição da API');
+                    }
+                    return response.json();
+                })
+                .then(data => {
+                    var latlng = new L.LatLng(data.results[0].geometry.lat, data.results[0].geometry.lng);
+
+                    if (currentMarker) {
+                        currentMarker.setLatLng(latlng);
+                    } else {
+                        currentMarker = L.marker(latlng).addTo(map);
+                    }
+
+                    map.setView(latlng, 15);
+                    updatePopup(latlng);
+                })
+                .catch(error => {
+                    console.error('Erro:', error);
+                    alert('Erro ao buscar o local. Tente novamente.');
+                });
+        }
+
+        function handleSearch() {
+            searchLocation();
+        }
+
+        document.getElementById('searchButton').addEventListener('click', handleSearch);
+
+        document.getElementById('search').addEventListener('keyup', function(event) {
+            if (event.key === 'Enter') {
+                handleSearch();
+            }
+        });
+
+        map.on('click', function(e) {
+            var latlng = e.latlng;
+
+            updatePopup(latlng);
+        });
+    </script>
 
 </body>
-
 </html>
+
+   
