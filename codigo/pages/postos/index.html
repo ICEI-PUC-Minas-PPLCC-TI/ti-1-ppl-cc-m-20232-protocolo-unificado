@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -14,7 +15,7 @@
             flex-direction: column;
             height: 100vh;
         }
-        
+
         header {
             background-color: #9dcbe8;
             padding: 10px;
@@ -61,6 +62,25 @@
             cursor: pointer;
         }
 
+        @media only screen and (max-width: 1100px) {
+            header {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .logo {
+                margin: 10px 0;
+            }
+
+            h1 {
+                font-size: 1.5em; 
+            }
+
+            #search-container {
+                top: 150px;
+            }
+        }
+
         .legend {
             position: absolute;
             bottom: 10px;
@@ -73,15 +93,17 @@
         }
 
         .legend img {
-            max-height: 20px; /* Ajuste a altura conforme necessário */
+            max-height: 20px;
+            /* Ajuste a altura conforme necessário */
             margin-right: 5px;
         }
     </style>
 </head>
+
 <body>
 
     <header>
-        <h1>POSTOS PRÓXIMOS</h1>
+        <h1>ㅤㅤUnidades Próximas</h1>
         <img src="imgs/logo.png" alt="Logo do posto" class="logo">
     </header>
 
@@ -96,7 +118,7 @@
         <p><img src="imgs/hosp.png" alt="Hospitais"> Hospitais e demais unidades de saúde</p>
         <p><img src="imgs/posto.png" alt="Farmácias"> Farmácias</p>
     </div>
-    
+
     <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
     <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
     <script>
@@ -180,6 +202,5 @@
     </script>
 
 </body>
-</html>
 
-   
+</html>
