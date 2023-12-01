@@ -24,3 +24,5 @@ O objetivo deste projeto é o desenvolvimento de um prontuário universal, ambie
 
 Assim que a primeira versão do sistema estiver disponível, deverá complementar com as instruções de utilização. Descreva como instalar eventuais dependências e como executar a aplicação.
 # cadastro_medicos
+# medical_registration
+# Medical_Registration-C
