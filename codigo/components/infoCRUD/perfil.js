@@ -64,8 +64,16 @@ document.addEventListener('load', carregarDados, false);
 		})
 
 
-	async function carregarBase(){
-		var resultado = await fetch("https://banco-de-dados.prizinhaw.repl.co/exames");
+	async function carregarRemedios(){
+		var resultado = await fetch("https://banco-de-dados.prizinhaw.repl.co/medicamentos");
+		var object = await resultado.json();
+		return object.reduce((a,b) => { 
+			return { ...a, [b.id]: b }
+		}, {})
+	}
+
+	async function carregarVacinas(){
+		var resultado = await fetch("https://banco-de-dados.prizinhaw.repl.co/vacinas");
 		var object = await resultado.json();
 		return object.reduce((a,b) => { 
 			return { ...a, [b.id]: b }
@@ -73,7 +81,15 @@ document.addEventListener('load', carregarDados, false);
 	}
 
 	async function carregarExames(){
-		var base = await carregarBase();
+		var resultado = await fetch("https://banco-de-dados.prizinhaw.repl.co/exames");
+		var object = await resultado.json();
+		return object.reduce((a,b) => { 
+			return { ...a, [b.id]: b }
+		}, {})
+	}
+
+	async function carregarExamesPaciente(){
+		var base = await carregarExames();
 
 		var resultado = await fetch("https://banco-de-dados.prizinhaw.repl.co/examesPaciente");
 		var object = await resultado.json();
@@ -83,8 +99,30 @@ document.addEventListener('load', carregarDados, false);
 		return array.length < 5 ? array : array.slice(Math.max(array.length - 5, 1));
 	}
 
-	async function MontarCarrosel(){
-		var exames = await carregarExames();
+	async function carregarRemediosPaciente(){
+		var base = await carregarRemedios();
+
+		var resultado = await fetch("https://banco-de-dados.prizinhaw.repl.co/medicamentoPaciente");
+		var object = await resultado.json();
+		var array=  object.filter(c => +c.paciente == +getCurrentUser().id).map((c) =>{
+			return { ...c, medicamento: base[c.medicamento] }
+		})
+		return array.length < 4 ? array : array.slice(Math.max(array.length - 4, 1));
+	}
+
+	async function carregarVacinasPaciente(){
+		var base = await carregarVacinas();
+
+		var resultado = await fetch("https://banco-de-dados.prizinhaw.repl.co/vacinaPaciente");
+		var object = await resultado.json();
+		var array=  object.filter(c => +c.paciente == +getCurrentUser().id).map((c) =>{
+			return { ...c, vacina: base[c.vacina] }
+		})
+		return array.length < 4 ? array : array.slice(Math.max(array.length - 4, 1));
+	}
+
+	async function montarExames(){
+		var exames = await carregarExamesPaciente();
 		var container = document.getElementById("exam-container");
 
 		container.innerHTML = "";
@@ -94,6 +132,42 @@ document.addEventListener('load', carregarDados, false);
 		}
 	}
 
+	async function montarMedicamentos(){
+		var exames = await carregarRemediosPaciente();
+		var container = document.getElementById("medicines-container");
+
+		container.innerHTML = "";
+		for(var exam of exames){
+			var c = createList(exam.medicamento.nome, exam.dosagem, exam.medicamento.unidade);
+			container.innerHTML += c;
+		}
+	}
+
+	async function montarVacinas(){
+		var exames = await carregarVacinasPaciente();
+		var container = document.getElementById("vaccines-container");
+		var list = document.createElement("ul");
+
+		container.innerHTML = "";
+		for(var exam of exames){
+			var listItem = document.createElement("li");
+			listItem.innerHTML = `${exam.vacina.nome}`;
+			list.appendChild(listItem);
+		}
+		container.appendChild(list);
+	}
+
+	
+
+	function createList(nome, value, unidade){
+		return `<div class=" text-center p-2 m-2" style="border-radius: 8px; box-shadow: 1px 1px 3px 1px rgba(0,0,0,.2);width: 50%;">
+			<div>
+				<p class="mb-0" style="font-weight: bold;color: rgba(0,0,0, .5);font-size: .77rem;">${nome}</p>
+				<p style="font-size: .85rem; flex: 0 0 30%;">${value} ${unidade}</p>
+			</div>
+		</div>
+		`
+	}
 
 	function createExamContainer(nome, value, unidade, min = 0, max = 100){
 		return `<div class="d-flex justify-content-between align-items-center mb-1">
@@ -110,5 +184,7 @@ document.addEventListener('load', carregarDados, false);
 		`
 	}
 	
-	MontarCarrosel();
+	montarExames();
+	montarMedicamentos();
+	montarVacinas();
 }

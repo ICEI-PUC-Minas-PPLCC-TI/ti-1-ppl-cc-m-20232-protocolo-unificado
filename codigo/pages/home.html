@@ -30,122 +30,109 @@
 										</div>
 									</div>
 								</div>
-								<!-- Carrossel de gráficos -->
-								<div id="carouselExample" class="carousel slide" data-bs-ride="carousel">
-									<div class="carousel-inner">
-										<div class="carousel-item active">
-											<div class="bg-white rounded">
-												<!-- Dados para um Exame de Hemograma Fictício -->
-												<div class="bg-white rounded p-4">
-													<div class="row">
-														<div class="col">
-															<p class=""><span class="text-primary font-italic">Evolução</span> (Últimos Exames)</p>
-														</div>
-													</div>
-													<div class="row">
-														<div class="col" id="exam-container">
-															
-														</div>
-													</div>
-												</div>
-												<!-- Fim dos Dados para um Exame de Hemograma Fictício -->
+								<div class="card mb-4" >
+									<div class="card-body">
+										<div class="row ">
+											<div class="col-sm-5">
+												<p class="mb-0">Nome:</p>
 											</div>
+											<div id="nome" class="col-sm-7"></div>
+										</div>
+										<hr class="m-0 my-1">
+										<div class="row">
+											<div class="col-sm-5">
+												<p class="mb-0">Data de Nascimento:</p>
+											</div>
+											<div id="dataNasc" class="col-sm-7"></div>
+										</div>
+										<hr class="m-0 my-1">
+										<div class="row">
+											<div class="col-sm-5">
+												<p class="mb-0">Endereço:</p>
+											</div>
+											<div id="endereco" class="col-sm-7"></div>
+										</div>
+										<hr class="m-0 my-1">
+										<div class="row">
+											<div class="col-sm-5">
+												<p class="mb-0">Sexo:</p>
+											</div>
+											<div id="sexo" class="col-sm-7"></div>
+										</div>
+										<hr class="m-0 my-1">
+										<div class="row">
+											<div class="col-sm-5">
+												<p class="mb-0">Tipo Sanguíneo:</p>
+											</div>
+											<div id="sangue" class="col-sm-7"></div>
+										</div>
+										<hr class="m-0 my-1">
+										<div class="row">
+											<div class="col-sm-5">
+												<p class="mb-0">Etnia:</p>
+											</div>
+											<div id="etnia" class="col-sm-7"></div>
+										</div>
+										<hr class="m-0 my-1">
+										<div class="row">
+											<div class="col-sm-5">
+												<p class="mb-0">Estado Civil:</p>
+											</div>
+											<div id="estadoC" class="col-sm-7"></div>
+										</div>
+										<hr class="m-0 my-1">
+										<div class="row">
+											<div class="col-sm-5">
+												<p class="mb-0">Altura:</p>
+											</div>
+											<div id="alt" class="col-sm-7"></div>
+										</div>
+										<hr class="m-0 my-1">
+										<div class="row">
+											<div class="col-sm-5">
+												<p class="mb-0">Peso:</p>
+											</div>
+											<div id="peso" class="col-sm-7"></div>
 										</div>
 									</div>
 								</div>
 							</div>
 							<div class="col-lg-7">
-								<div class="card mb-4">
-									<div class="card-body">
+								<div class="bg-white rounded  mb-3">
+									<div class="bg-white rounded p-4">
 										<div class="row">
-											<div class="col-sm-3">
-												<p class="mb-0">Nome:</p>
+											<div class="col">
+												<p class=""><span class="text-primary font-italic">Últimos Exames </span></p>
 											</div>
-											<div id="nome" class="col-sm-9"></div>
 										</div>
-										<hr>
 										<div class="row">
-											<div class="col-sm-3">
-												<p class="mb-0">Data de Nascimento:</p>
+											<div class="col" id="exam-container">
+												Não existem exames
 											</div>
-											<div id="dataNasc" class="col-sm-9"></div>
 										</div>
-										<hr>
+									</div>
+								</div>
+								<div class="bg-white rounded mb-3">
+									<div class="bg-white rounded p-4">
 										<div class="row">
-											<div class="col-sm-3">
-												<p class="mb-0">Endereço:</p>
+											<div class="col">
+												<p class=""><span class="text-primary font-italic">Últimas Vacinas</span> </p>
 											</div>
-											<div id="endereco" class="col-sm-9"></div>
 										</div>
-										<hr>
-										<div class="row">
-											<div class="col-sm-3">
-												<p class="mb-0">Sexo:</p>
-											</div>
-											<div id="sexo" class="col-sm-9"></div>
+										<div class="w-100 d-flex" id="vaccines-container">
+											Não existem Vacinas
 										</div>
-										<hr>
+									</div>
+								</div>
+								<div class="bg-white rounded mb-3">
+									<div class="bg-white rounded p-4">
 										<div class="row">
-											<div class="col-sm-3">
-												<p class="mb-0">Tipo Sanguíneo:</p>
+											<div class="col">
+												<p class=""><span class="text-primary font-italic">Últimos Medicamentos</span> </p>
 											</div>
-											<div id="sangue" class="col-sm-9"></div>
 										</div>
-										<hr>
-										<div class="row">
-											<div class="col-sm-3">
-												<p class="mb-0">Etnia:</p>
-											</div>
-											<div id="etnia" class="col-sm-9"></div>
-										</div>
-										<hr>
-										<div class="row">
-											<div class="col-sm-3">
-												<p class="mb-0">Estado Civil:</p>
-											</div>
-											<div id="estadoC" class="col-sm-9"></div>
-										</div>
-										<hr>
-										<div class="row">
-											<div class="col-sm-3">
-												<p class="mb-0">Altura:</p>
-											</div>
-											<div id="alt" class="col-sm-9"></div>
-										</div>
-										<hr>
-										<div class="row">
-											<div class="col-sm-3">
-												<p class="mb-0">Peso:</p>
-											</div>
-											<div id="peso" class="col-sm-9"></div>
-										</div>
-										<hr>
-										<div class="row">
-											<div class="col-sm-3">
-												<p class="mb-0">Alergia:</p>
-											</div>
-											<div id="alergia" class="col-sm-9"></div>
-										</div>
-										<hr>
-										<div class="row">
-											<div class="col-sm-3">
-												<p class="mb-0">Remédios em uso:</p>
-											</div>
-											<div id="remedio" class="col-sm-9"></div>
-										</div>
-										<hr>
-										<div class="row">
-											<div class="col-sm-3">
-												<p class="mb-0">Vacina:</p>
-											</div>
-											<div id="vacina" class="col-sm-9"></div>
-										</div>
-										<hr>
-										<div class="row">
-											<div class="col-sm-3">
-												<p class="mb-0">Histórico Médico:</p>
-											</div>
-											<div id="historico" class="col-sm-9"></div>
+										<div class="w-100 d-flex" id="medicines-container">
+											Não existem Vacinas
 										</div>
 									</div>
 								</div>

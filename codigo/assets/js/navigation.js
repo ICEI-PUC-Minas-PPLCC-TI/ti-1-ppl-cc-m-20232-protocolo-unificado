@@ -20,7 +20,11 @@ document.addEventListener('DOMContentLoaded', () => {
 			name: "Vacinas", 
 			onclick: () => goTo(`vacinas.html`)
 		},
-		
+		{ 
+			icon: '<i class="fa fas fa-book-medical"></i>', 
+			name: "Doencas", 
+			onclick: () => goTo(`doencascronicas.html`)
+		},
 		{ 
 			icon: '<i class="fa fa-solid fa-hospital"></i>', 
 			name: "Postos", 
@@ -31,11 +35,7 @@ document.addEventListener('DOMContentLoaded', () => {
 			name: "Farmacias", 
 			onclick: () => goTo(`farmacias.html`)
 		},
-		{ 
-			icon: '<i class="fa fas fa-disease"></i>', 
-			name: "Doencas", 
-			onclick: () => goTo(`doencascronicas.html`)
-		},
+		
 		
 	])
 });

@@ -132,3 +132,7 @@
 	height: 120px;
 	width: 100%;
 }
+
+#cadastro-container{
+	background-color: var(--main-backgroud);
+}
