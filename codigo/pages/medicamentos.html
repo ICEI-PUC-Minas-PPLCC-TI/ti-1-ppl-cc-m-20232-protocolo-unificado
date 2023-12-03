@@ -22,17 +22,18 @@
 				
 				<div id="form-exams">
 					<h2>Adicionar Novo Medicamento:</h2>
-					<label for="sexo" >Sexo</label>
-					<select class="form-control" id="exames-select" name="sexo">
+					<label for="medicine" >Medicamento</label>
+					<select class="form-control" id="medicine-select" name="medicine">
 					</select>
 					<div class="form-group mb-3">
 						<label for="exam-date">Data:</label>
-						<input class="form-control" type="date" id="exam-date" required>
+						<input class="form-control" type="date" id="medicine-date" required>
 					</div>
 					<div class="form-group mb-3">
-						<label for="exam-result">Resultado:</label>
-						<input class="form-control" type="text" id="exam-result" required>
+						<label for="exam-dosage">Dosagem (em mg):</label>
+						<input class="form-control" type="number" id="medicine-dosage" required>
 					</div>
+				
 					<button class="btn btn-primary" id="add-exam-button">
 						Adicionar Exame
 					</button>

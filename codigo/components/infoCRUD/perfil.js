@@ -62,4 +62,53 @@ document.addEventListener('load', carregarDados, false);
 			internacao.innerHTML = db.internacao;
 			descricaoInternacao.innerHTML = db.descricaoInternacao;
 		})
+
+
+	async function carregarBase(){
+		var resultado = await fetch("https://banco-de-dados.prizinhaw.repl.co/exames");
+		var object = await resultado.json();
+		return object.reduce((a,b) => { 
+			return { ...a, [b.id]: b }
+		}, {})
+	}
+
+	async function carregarExames(){
+		var base = await carregarBase();
+
+		var resultado = await fetch("https://banco-de-dados.prizinhaw.repl.co/examesPaciente");
+		var object = await resultado.json();
+		var array=  object.filter(c => +c.paciente == +getCurrentUser().id).map((c) =>{
+			return { ...c, exame: base[c.exame] }
+		})
+		return array.length < 5 ? array : array.slice(Math.max(array.length - 5, 1));
+	}
+
+	async function MontarCarrosel(){
+		var exames = await carregarExames();
+		var container = document.getElementById("exam-container");
+
+		container.innerHTML = "";
+		for(var exam of exames){
+			var c = createExamContainer(exam.exame.nome, exam.valor, exam.exame.unidade, exam.exame.referenciaMax, exam.exame.referenciaMin);
+			container.innerHTML += c;
+		}
+	}
+
+
+	function createExamContainer(nome, value, unidade, min = 0, max = 100){
+		return `<div class="d-flex justify-content-between align-items-center mb-1">
+			<div style="width: 30%">
+				<p class="mb-0" style="font-weight: bold;color: rgba(0,0,0, .5);font-size: .77rem;">${nome}</p>
+				<p style="font-size: .85rem; flex: 0 0 30%;">${value} ${unidade}</p>
+			</div>
+			<div style="width: 70%" class="d-flex justify-content-between align-items-end ">
+				<div class="progress rounded w-100" style="height: 5px">
+					<div class="progress-bar" role="progressbar" style="width: 100%" aria-valuenow="${value}" aria-valuemin="${min}" aria-valuemax="${max}}"></div>
+				</div>
+			</div>
+		</div>
+		`
+	}
+	
+	MontarCarrosel();
 }

@@ -19,14 +19,21 @@ document.addEventListener("DOMContentLoaded", function () {
 		})
 	}, 500)
 
+	async function carregarBase(){
+		var resultado = await fetch("https://banco-de-dados.prizinhaw.repl.co/vacinas");
+		var object = await resultado.json();
+		return object.reduce((a,b) => { 
+			return { ...a, [b.id]: b }
+		}, {})
+	}
 
 	// Função para carregar os dados a partir do LocalStorage ou do JSON
 	function carregarDados() {
 		mostrarPedidos((e) => true);
-		fetch("https://banco-de-dados.prizinhaw.repl.co/vacine")
+		fetch("https://banco-de-dados.prizinhaw.repl.co/vacinas")
 			.then((response) => response.json())
 			.then((data) => {
-				var c = document.getElementById("exames-select");
+				var c = document.getElementById("vacine-select");
 				for(var exam of  data){
 					var option = document.createElement("option");
 					option.innerHTML = exam.nome;
@@ -42,19 +49,19 @@ document.addEventListener("DOMContentLoaded", function () {
 	function mostrarPedidos(filtro) {
 		fetch("https://banco-de-dados.prizinhaw.repl.co/vacinaPaciente")
 			.then((response) => response.json())
-			.then((exames) => {
+			.then(async (exames) => {
+				var e = await carregarBase();
 				examDetails.innerHTML = "";
 				for(var exam of exames) 
 				{
+					console.log(e, e[exam.vacina])
 					if(exam && +exam.paciente == getCurrentUser().id && filtro(exam)) {
 						const exameElement = document.createElement("div");
 						exameElement.className = "exam-container";
 						exameElement.innerHTML = `
 							<p><strong>ID:</strong> ${exam.id}</p>
-							<p><strong>Nome do Exame:</strong> ${exam.nome}</p>
+							<p><strong>Nome do Exame:</strong> ${e[exam.vacina].nome}</p>
 							<p><strong>Data:</strong> ${exam.data}</p>
-							<p><strong>Resultado:</strong> ${exam.resultado}</p>
-							<p><strong>Valor de Referência:</strong> ${exam.referencia}</p>
 						`;
 						examDetails.appendChild(exameElement);
 					}
@@ -66,26 +73,25 @@ document.addEventListener("DOMContentLoaded", function () {
 
 	// Função para adicionar um novo exame
 	function adicionarExame() {
-		const examID = document.getElementById("exames-select").value;
-		const examDate = document.getElementById("exam-date").value;
-		const examValue = document.getElementById("exam-result").value;
-
+		const examID = document.getElementById("vacine-select").value;
+		const examDate = document.getElementById("vacine-date").value;
 
 		var examePaciente = {
-			id: uuidv4(),
-			exame: +examID,
+			vacina: +examID,
 			paciente: +getCurrentUser().id,
-			valor: +examValue,
 			data: examDate
 		}
 
-		fetch("https://banco-de-dados.prizinhaw.repl.co/examesPaciente", {
+		fetch("https://banco-de-dados.prizinhaw.repl.co/vacinaPaciente", {
 			method: "POST",
+			headers: {
+				'Content-Type': 'application/json',
+			},
 			body: JSON.stringify(examePaciente)
 		})
 			.then((response) => response.json())
 			.then((data) => {
-				console.log(data)
+				mostrarPedidos((e) => true);
 			})
 			.catch((error) => {
 			});

@@ -7,17 +7,19 @@ document.addEventListener('DOMContentLoaded', () =>
 		window.location.href = "home.html"
 });
 
-async function login(id, password){
+async function login(email, password){
 	fetch(`https://banco-de-dados.prizinhaw.repl.co/pacientes`)
 		.then(c => c.json())
 		.then((data) => {
-			const user = data.find(c => c.id === +id);
+			const user = data.find(c => c.email === email && c.senha === password);
+
 			if(user){
 				setCurrentUser(user);
 				window.location.href = "home.html"
-
+			} else { 
+				alert("Usuário ou senha inválidos, tente novamente")
 			}
-		});
+		})
 }
 
 function logout(){ 
