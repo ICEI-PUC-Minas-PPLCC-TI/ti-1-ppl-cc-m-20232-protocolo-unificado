@@ -26,8 +26,6 @@ function adicionarPaciente(e) {
 	})
 		.then(function (response) { return response.json() })
 		.then(data => { 
-			console.log(window.location);
-			var path = window.location.pathname.split("/");
-			window.location.href = path[path.length - 1] = "inicial.html?id="+data.id;
+			window.location.href = "login.html";
 		});
 }
