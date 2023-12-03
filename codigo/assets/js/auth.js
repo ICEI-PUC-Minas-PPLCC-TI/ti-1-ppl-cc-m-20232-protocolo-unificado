@@ -1,29 +1,27 @@
-document.addEventListener('DOMContentLoaded', () => {
-    // setCurrentUser({ name: "higor", cpf: "123123123-02" })
-    console.log("CARREGAR");
+document.addEventListener('DOMContentLoaded', () => 
+{
+	if(!getCurrentUser() && !window.location.pathname.includes("login.html"))
+		window.location.href = "login.html"
 
-    // if(!getCurrentUser())
-    //     window.location.href = "E:\\Repos\\ti-1-ppl-cc-m-20232-protocolo-unificado\\codigo\\pages\\infoCRUD\\cadastro.html"
+	if(getCurrentUser() && window.location.pathname.includes("login.html"))
+		window.location.href = "home.html"
 });
 
 async function login(id, password){
-    // setCurrentUser({ name: "higor", cpf: "123123123-02" })
+	fetch(`https://banco-de-dados.prizinhaw.repl.co/pacientes`)
+		.then(c => c.json())
+		.then((data) => {
+			const user = data.find(c => c.id === +id);
+			if(user){
+				setCurrentUser(user);
+				window.location.href = "home.html"
 
-    fetch(`https://banco-de-dados.prizinhaw.repl.co/pacientes`)
-        .then(c => c.json())
-        .then((data) => {
-            const user = data.find(c => c.id === +id);
-            console.log(user, id)
-            if(user){
-                setCurrentUser(user);
-                window.location.href = "E:\\Repos\\ti-1-ppl-cc-m-20232-protocolo-unificado\\codigo\\pages\\infoCRUD\\inicial.html"
-
-            }
-        });
+			}
+		});
 }
 
 function logout(){ 
-    localStorage.clear(); 
+	localStorage.clear(); 
 }
 
 function setCurrentUser(user){ localStorage.setItem("user", JSON.stringify(user)); }

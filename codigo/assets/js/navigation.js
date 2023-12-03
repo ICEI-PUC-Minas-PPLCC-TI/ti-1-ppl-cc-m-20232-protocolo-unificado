@@ -3,18 +3,40 @@ document.addEventListener('DOMContentLoaded', () => {
 		{ 
 			icon: '<i class="fa fa-laptop-medical"></i>', 
 			name: "Home", 
-			onclick: () => goTo("E:\\Repos\\ti-1-ppl-cc-m-20232-protocolo-unificado\\codigo\\pages\\infoCRUD\\urgencia.html")
+			onclick: () => goTo("home.html")
+		},
+		{ 
+			icon: '<i class="fa fa-vial"></i>', 
+			name: "Exames", 
+			onclick: () => goTo(`exames.html`)
 		},
 		{ 
 			icon: '<i class="fa fa-pills"></i>', 
-			name: "Medicines", 
-			onclick: () => goTo("E:\\Repos\\ti-1-ppl-cc-m-20232-protocolo-unificado\\codigo\\pages\\medicineCRUD\\index.html")
+			name: "Medicamentos", 
+			onclick: () => goTo("medicamentos.html")
 		},
 		{ 
 			icon: '<i class="fa fa-syringe"></i>', 
-			name: "Vaccines", 
-			onclick: () => goTo(`E:\\Repos\\ti-1-ppl-cc-m-20232-protocolo-unificado\\codigo\\pages\\vaccineCRUD\\index.html`)
+			name: "Vacinas", 
+			onclick: () => goTo(`vacinas.html`)
 		},
+		
+		{ 
+			icon: '<i class="fa fa-solid fa-hospital"></i>', 
+			name: "Postos", 
+			onclick: () => goTo(`postos.html`)
+		},
+		{ 
+			icon: '<i class="fa fa-clinic-medical"></i>', 
+			name: "Farmacias", 
+			onclick: () => goTo(`farmacias.html`)
+		},
+		{ 
+			icon: '<i class="fa fas fa-disease"></i>', 
+			name: "Doencas", 
+			onclick: () => goTo(`doencascronicas.html`)
+		},
+		
 	])
 });
 
@@ -25,7 +47,6 @@ function buildNavbarWithItems(items){
 	}
 
 	buildLogoutButton(navbar);
-	buildLoginButton(navbar);
 }
 
 function buildLoginButton(navbar){
@@ -42,7 +63,10 @@ function buildLogoutButton(navbar){
 	var logoutItem = createItem({ 
 		icon: '<i class="fa fa-sign-out-alt"></i>', 
 		name: "Logout", 
-		onclick: () => { logout(); }
+		onclick: () => { 
+			logout();
+			window.location.href = "login.html"
+		}
 	})
 
 	logoutItem.classList.add("last-item");
