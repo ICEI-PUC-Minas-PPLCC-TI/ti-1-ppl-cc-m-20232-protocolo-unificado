@@ -50,7 +50,6 @@ document.addEventListener("DOMContentLoaded", function () {
 	
 	// Função para mostrar a lista de pedidos
 	function mostrarPedidos(filtro) {
-		
 		fetch("https://banco-de-dados.prizinhaw.repl.co/examesPaciente")
 			.then((response) => response.json())
 			.then(async (exames) => {
