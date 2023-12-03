@@ -578,37 +578,154 @@ As principais funções do projeto são:
                 <p>Apresente as estruturas de dados utilizadas na solução tanto para dados utilizados na essência da aplicação quanto outras estruturas que foram criadas para algum tipo de configuração</p>
                 <p>Nomeie a estrutura, coloque uma descrição sucinta e apresente um exemplo em formato JSON.</p>
               </div>
-
+                
               <section>
-                <h5>Estrutura de Dados - Contatos<span class="exemplo">EXEMPLO</span></h5>
-                <p>Contatos da aplicação</p>
+                <h5>Estrutura de Dados - Pacientes<span class="exemplo">EXEMPLO</span></h5>
+                <p>Registro dos pacientes cadastrados</p>
                 <pre>
+                "pacientes": [
                   {
-                    "id": 1,
-                    "nome": "Leanne Graham",
-                    "cidade": "Belo Horizonte",
-                    "categoria": "amigos",
-                    "email": "Sincere@april.biz",
-                    "telefone": "1-770-736-8031",
-                    "website": "hildegard.org"
+                    "nome": "Priscila Andrade de Moraes",
+                    "dataNascimento": "2003-04-16",
+                    "senha": "pri123",
+                    "email": "pri@email.com",
+                    "endereco": "Avenida do Povo, 171 - Recanto da Paz",
+                    "sexo": "feminino",
+                    "tipoSanguineo": "A+",
+                    "etnia": "branca",
+                    "estadoCivil": "solteiro",
+                    "altura": "165",
+                    "peso": "48",
+                    "alergias": "Nenhuma conhecida",
+                    "historicoDeDoencas": "Nenhum",
+                    "id": 1
                   }
+                 ]
                 </pre>
               </section>
 
               <section>
-                <h5>Estrutura de Dados - Usuários<span class="exemplo">EXEMPLO</span></h5>
-                <p>Registro dos usuários do sistema utilizados para login e para o perfil do sistema</p>
+                <h5>Estrutura de Dados - Exames<span class="exemplo">EXEMPLO</span></h5>
+                <p>Registro dos exames cadastrados</p>
                 <pre>
-                  {
-                    id: "eed55b91-45be-4f2c-81bc-7686135503f9"
-                    email: "admin@abc.com"
-                    id: "eed55b91-45be-4f2c-81bc-7686135503f9"
-                    login: "admin"
-                    nome: "Administrador do Sistema"
-                    senha: "123"
-                  }
+                  "exames": [
+                    {
+                      "id": 1,
+                      "nome": "Glicemia de Jejum",
+                      "referenciaMax": 110,
+                      "referenciaMin": null,
+                      "unidade": "mg/dL"
+                    }
+                  ]
                 </pre>
               </section>
+
+              <section>
+                <h5>Estrutura de Dados - Exames do Paciente <span class="exemplo">EXEMPLO</span></h5>
+                <p>Registro dos exames feitos por determinado paciente</p>
+                <pre>
+                 "examesPaciente": [
+                   {
+                      "exame": 1,
+                      "paciente": 1,
+                      "valor": 123,
+                      "data": "2023-12-22",
+                      "id": 1
+                    }
+                  ]
+                </pre>
+              </section>
+
+              <section>
+                <h5>Estrutura de Dados - Vacinas<span class="exemplo">EXEMPLO</span></h5>
+                <p>Registro das Vacinas cadastradas</p>
+                <pre>
+                  "vacinas": [
+                    {
+                      "id": 1,
+                      "nome": "Tetano"
+                    }
+                  ]                
+                </pre>
+              </section>
+
+              <section>
+                <h5>Estrutura de Dados - Vacinas do Paciente <span class="exemplo">EXEMPLO</span></h5>
+                <p>Registro das Vacinas tomadas por determinado paciente</p>
+                <pre>
+                  "vacinaPaciente": [
+                    {
+                      "vacina": 1,
+                      "paciente": 2,
+                      "data": "",
+                      "id": 1
+                    }
+                  ]
+                </pre>
+              </section>
+
+              <section>
+                <h5>Estrutura de Dados - Medicamentos<span class="exemplo">EXEMPLO</span></h5>
+                <p>Registro dos Medicamentos cadastrados</p>
+                <pre>
+                  "medicamentos": [
+                    {
+                      "id": 1,
+                      "nome": "Nimesulida"
+                    }
+                  ]                
+                </pre>
+              </section>
+
+              <section>
+                <h5>Estrutura de Dados - Medicamentos do Paciente <span class="exemplo">EXEMPLO</span></h5>
+                <p>Registro dos Medicamentos prescrevidos para determinado paciente</p>
+                <pre>
+                  "MedicamentoPaciente": [
+                    {
+                      "medicamento": 1,
+                      "paciente": 2,
+                      "dosagem": 0,
+                      "data": "",
+                      "id": 1
+                    }
+                  ]
+                </pre>
+              </section>
+
+              <section>
+                <h5>Estrutura de Dados - Doenças Crônicas<span class="exemplo">EXEMPLO</span></h5>
+                <p>Registro das Doenças Crônicas cadastradas</p>
+                <pre>
+                  "doencasCronicas": [
+                    {
+                      "id": 1,
+                      "nome": "Obesidade"
+                    }
+                  ]                
+                </pre>
+              </section>
+
+              <section>
+                <h5>Estrutura de Dados - Doenças Crônicas do Paciente <span class="exemplo">EXEMPLO</span></h5>
+                <p>Registro das Doenças Crônicas de determinado paciente</p>
+                <pre>
+                  "doencasCronicasPaciente": [
+                    {
+                      "diagnostico": 1,
+                      "paciente": 2,
+                      "data": "",
+                      "medicamentos": "1234",
+                      "ultimaConsulta": "",
+                      "resumoConsulta": "123412",
+                      "procedimentos": "1234",
+                      "id": 1
+                    }
+                  ]
+                </pre>
+              </section>
+
+
             </section>
 
             <!-- Módulos e APIs ================= -->
@@ -622,16 +739,17 @@ As principais funções do projeto são:
               </div>
 
               <section>
-                <h5>Images:</h5>
+                <h5>Ícones:</h5>
                 <ul>
-                  <li>Unsplash - <a target="_blank" href="https://unsplash.com/">https://unsplash.com/</a><span class="exemplo">EXEMPLO</span></li>
+                  <li>Font Awesome - <a target="_blank" href="https://fontawesome.com/">https://fontawesome.com/</a><span class="exemplo">EXEMPLO</span></li>
                 </ul>
               </section>
 
               <section>
-                <h5>Fonts:</h5>
+                <h5>API's:</h5>
                 <ul>
-                  <li>Icons Font Face - <a target="_blank" href="https://fontawesome.com/">https://fontawesome.com/</a><span class="exemplo">EXEMPLO</span></li>
+                  <li>Open Cage - <a target="_blank" href="https://opencagedata.com/">https://opencagedata.com/</a><span class="exemplo">EXEMPLO</span></li>
+                  <li>API do Google Maps - <a target="_blank" href="https://developers.google.com/maps/documentation">https://developers.google.com/maps/documentation</a><span class="exemplo">EXEMPLO</span></li>
                 </ul>
               </section>
 
@@ -642,6 +760,7 @@ As principais funções do projeto são:
                   <li>Bootstrap 4 - <a target="_blank" href="http://getbootstrap.com/">http://getbootstrap.com/</a><span class="exemplo">EXEMPLO</span></li>
                 </ul>
               </section>
+              
             </section>
 
           </section>
@@ -664,27 +783,20 @@ As principais funções do projeto são:
                   <div class="card">
                     <div class="card-header" id="heading1">
                       <h5 class="mb-0"> <a href="#" class="collapsed" data-toggle="collapse" data-target="#collapse1"
-                          aria-expanded="false" aria-controls="collapse1">What does royalty free mean?</a> </h5>
+                          aria-expanded="false" aria-controls="collapse1">Como os pacientes podem acessar e usar o prontuário unificado?</a> </h5>
                     </div>
                     <div id="collapse1" class="collapse" aria-labelledby="heading1" data-parent="#popularTopics">
-                      <div class="card-body"> Lorem Ipsum is simply dummy text of the printing and typesetting industry.
-                        Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown
-                        printer took a galley of type and scrambled it to make a type specimen book. It has survived not
-                        only five centuries, but also the leap into electronic typesetting, remaining essentially
-                        unchanged. </div>
+                      <div class="card-body"> Através de criação de login e senha e, em seguida, cadastrando as próprias informações de saúde e pessoais.
+                         </div>
                     </div>
                   </div>
                   <div class="card">
                     <div class="card-header" id="heading2">
                       <h5 class="mb-0"> <a href="#" class="collapsed" data-toggle="collapse" data-target="#collapse2"
-                          aria-expanded="false" aria-controls="collapse2">What is a single application?</a> </h5>
+                          aria-expanded="false" aria-controls="collapse2">Quais são os passos básicos para instalar a aplicação?</a> </h5>
                     </div>
                     <div id="collapse2" class="collapse" aria-labelledby="heading2" data-parent="#popularTopics">
-                      <div class="card-body"> Iisque Anim pariatur cliche reprehenderit, enim eiusmod high life
-                        accusamus terry richardson ad squid. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf
-                        moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch
-                        et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea
-                        proident. Ad vegan excepteur butcher vice lomo. </div>
+                      <div class="card-body"> Não é necessário instalação, ela está disponível online. </div>
                     </div>
                   </div>
                   <div class="card">
@@ -714,7 +826,9 @@ As principais funções do projeto são:
             <div class="alert alert-warning collapse" role="alert" id="collapseReferencias">
               <p>Apresente as referências bibliográficas utilizadas no projeto. Inclua itens como: (1) livros, artigos, tutoriais, etc. utilizados no desenvolvimento da solução; (2) links para sites, blogs, etc. utilizados no desenvolvimento da solução.</p>
             </div>
-            <p>......  COLOQUE AQUI O SEU TEXTO ......</p>
+            <p>ALEXANDRE, R. S. Atualizações sobre o Prontuário Unificado: benefícios e inclusão no Sistema Único de Saúde e Planos. REPOSITORIO PUCSP, 2023.</p>
+            <p>NUNES, C. C.; MA, S.; FILHO, M. S. T. Armazenamento descentralizado no Sistema Único de Saúde brasileiro (SUS) usando Interplanetary File System (IPFS) e Blockchain. Revista de direito, v. 13, n. 01, p. 01–25, 2021.</p>
+            <p>DEVPLENO. Navigator Geolocation API - Sabendo a Localização do Usuário. Disponível em: <a target="_blank" href="https://www.youtube.com/watch?v=WrzA8oqcxjA">https://www.youtube.com/watch?v=WrzA8oqcxjA</a>.</p>
           </section>
 
         </div>
